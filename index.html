@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Graduation Invitation</title>
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <style>
+        /* CSS Styles */
+        body {
+            background-color: #0a0a0a;
+            color: #96f996;
+            /* أخضر فاتح أكثر وضوحًا */
+            font-family: 'Consolas', 'Monaco', monospace;
+            /* خط أكثر وضوحًا */
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-size: 44px;
+            /* حجم خط أكبر */
+        }
+
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        #terminal {
+            flex: 1;
+            padding: 30px;
+            /* زيادة المساحة الداخلية */
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .command-line {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .prompt {
+            color: #96f996;
+            margin-right: 15px;
+            white-space: nowrap;
+            font-size: 38px;
+            /* حجم أكبر للنص */
+            font-weight: bold;
+            /* خط عريض */
+        }
+
+        #input-line {
+            display: flex;
+            margin-top: auto;
+            padding-bottom: 20px;
+            position: sticky;
+            bottom: 0;
+            background: #0a0a0a;
+        }
+
+        #command-input {
+            background: transparent;
+            border: 2px solid #96f996;
+            /* إطار أكثر وضوحًا */
+            color: #f5d7a1;
+            /* لون أبيض مائل للصفرة */
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 38px;
+            /* حجم خط أكبر */
+            width: 100%;
+            outline: none;
+            caret-color: #96f996;
+            padding: 10px;
+            /* زيادة المساحة الداخلية */
+            border-radius: 5px;
+            /* زوايا مدورة */
+        }
+
+        .output {
+            margin-bottom: 25px;
+            /* زيادة المسافة بين الأسطر */
+            line-height: 1.8;
+            /* زيادة تباعد الأسطر */
+            font-size: 36px;
+            /* حجم خط أكبر */
+        }
+
+        .ai-response {
+            color: #00aaff;
+            /* أزرق أكثر إشراقًا */
+            animation: fadeIn 0.5s;
+            font-weight: bold;
+            /* خط عريض */
+        }
+
+        .invitation {
+            display: none;
+            background: rgba(0, 0, 0, 0.9);
+            /* خلفية أكثر عتامة */
+            border: 3px solid #96f996;
+            /* إطار أكثر سمكًا */
+            padding: 30px;
+            /* زيادة المساحة الداخلية */
+            margin: 30px auto;
+            max-width: 1500px;
+            /* عرض أكبر */
+            animation: fadeIn 1s;
+            color: #f5d7a1;
+            /* لون أبيض مائل للصفرة */
+            font-size: 38px;
+            /* حجم خط أكبر */
+            line-height: 2;
+            /* زيادة تباعد الأسطر */
+        }
+
+        .invitation h2 {
+            color: #96f996;
+            text-align: center;
+            border-bottom: 2px solid #96f996;
+            /* خط أكثر سمكًا */
+            padding-bottom: 20px;
+            margin-top: 0;
+            font-size: 40px;
+            /*حجم عنوان */
+        }
+
+        .invitation p {
+            margin: 15px 0;
+            /* زيادة المسافة بين الفقرات */
+        }
+
+        .highlight {
+            color: #96f996;
+            font-weight: bold;
+            font-size: 30px;
+            /* حجم خط أكبر للنصوص المميزة */
+        }
+
+        /* بقية الأنماط تبقى كما هي مع تعديل الأحجام */
+        .neural-network {
+            display: none;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .network-node {
+            display: inline-block;
+            width: 40px;
+            /* حجم أكبر */
+            height: 40px;
+            background: #00aaff;
+            border-radius: 50%;
+            margin: 15px;
+            line-height: 40px;
+            color: white;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            font-size: 20px;
+        }
+
+        /* بقية الكود يبقى كما هو */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 4px solid #96f996;
+            /* خط أكثر سمكًا */
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 3px;
+            /* زيادة تباعد الأحرف */
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+            font-size: 32px;
+            /* حجم خط أكبر */
+            font-weight: bold;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #96f996;
+            }
+        }
+
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: none;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="matrix-bg"></canvas>
+    <canvas id="confetti-canvas"></canvas>
+
+    <div id="terminal">
+        <div class="output">
+            <div class="typewriter">Welcome to Leyan Munther Buirat's  Graduation Invitation of AI-Powered Graduation Invitation😉</div>
+        </div>
+        <div class="output">
+            <div class="typewriter">🎓 INTRODUCTION GRADUATION INVITATION 🎓😉👩‍🎓👩🕙😃🥳🥳 ...</div>
+        </div>
+        <div class="output ai-response">
+            Hello! THIS 🎓 INTRODUCTION GRADUATION INVITATION 🎓 FOR YOU 😉🥳🥳. Type <span
+                class="highlight">help</span> to see available commands.
+        </div>
+
+        <div id="command-history"></div>
+
+        <div class="command-line">
+            <label for="command-input" class="prompt">Engineering👩‍🎓LeyanBuirat@graduation:~$</label>
+            <input type="text" id="command-input" autofocus>
+        </div>
+    </div>
+
+    <div id="neural-network" class="neural-network">
+        <svg width="300" height="200">
+            <!-- Neural network visualization will be added here by JavaScript -->
+        </svg>
+    </div>
+
+    <div id="invitation" class="invitation">
+        <h2>🎓 INTRODUCTION GRADUATION INVITATION 🎓</h2>
+        <p>You are cordially invited to attend😉🥳🥳🥳</p>
+        <p><span class="highlight">Eng.Leyan Munther Buirat </span> INTRODUCTION GRADUATION Presentation👩‍🎓🕙🥳</p>
+        <p>for the degree of <span class="highlight">Computer Engineering👩‍🎓</span></p>
+        <p>with concentration in <span class="highlight">Artificial Intelligence</span></p>
+        <p>the topic <span class="highlight">AI-powered Meal Recognition & Recipe Assistant (Dr.Yazan Abu Fraha) </span>
+        </p>
+        <br>
+        <p>📅 <span class="highlight">Saturday, July 12th, 2025 👩‍🎓</span></p>
+        <p>🕙 <span class="highlight">10:00 AM 👩‍🎓🕙to 10:50 AM👩‍🎓🕚</span></p>
+        <p>🏛️ <span class="highlight">MASRI College of Technology</span></p>
+        <p>📍 <span class="highlight">Hall 303, Third Floor</span></p>
+        <br>
+        <p class="highlight">_________________________🎓👩‍🎓🎓_____________________________</p>
+        <p class="highlight">🥹🥹🫶⏳⌛️🤍🤍🤲🤲🤲الحمدلله وكان فضلك ربي علي عظيما </p>
+        <p class="highlight">بكل الحب أتشرف بدعوتكم🔥⌛️🤍 لحضور نقاشي لمقدمة تخرجي </p>
+        <p class="highlight">😎🫶🔥⌛️🙆‍♀️🌸🌸⌛️🤍🙆‍♀️🌸🌸أهلاً وسهلاً بتشرفوني</p>
+        <p class="highlight">_________________________🎓👩‍🎓🎓_____________________________</p>
+    </div>
+
+    <script>
+        // Matrix background effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = ' INTRODUCTION GRADUATION INVITATION Computer Engineering Leyan Buirat Artificial Intelligence Computer Engineering Artificial Intelligence Computer Engineering ';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const binary = '01';
+
+        const alphabet = katakana + latin + nums + binary;
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const rainDrops = [];
+
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+
+        const drawMatrix = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = 'rgb(150, 249, 150)';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        setInterval(drawMatrix, 30);
+
+        // Terminal functionality
+        const commandInput = document.getElementById('command-input');
+        const commandHistory = document.getElementById('command-history');
+        const invitation = document.getElementById('invitation');
+        const neuralNetwork = document.getElementById('neural-network');
+        const terminal = document.getElementById('terminal');
+
+        const commands = {
+            help: {
+                description: 'Show available commands',
+                execute: () => {
+                    addOutput('Available commands:', 'ai-response');
+                    for (const cmd in commands) {
+                        addOutput(`${cmd} - ${commands[cmd].description}`, 'ai-response');
+                    }
+                }
+            },
+            invite: {
+                description: 'Show graduation invitation',
+                execute: () => {
+                    addOutput('Accessing invitation database...', 'ai-response');
+                    setTimeout(() => {
+                        addOutput('Verifying credentials...', 'ai-response');
+                        setTimeout(() => {
+                            addOutput('Activating neural network...', 'ai-response');
+                            showNeuralNetwork();
+                            setTimeout(() => {
+                                invitation.style.display = 'block';
+                                addOutput('Invitation unlocked!', 'ai-response');
+                                // Scroll to show the invitation
+                                invitation.scrollIntoView({ behavior: 'smooth' });
+                            }, 2000);
+                        }, 1000);
+                    }, 1000);
+                }
+            },
+            clear: {
+                description: 'Clear the terminal',
+                execute: () => {
+                    commandHistory.innerHTML = '';
+                    invitation.style.display = 'none';
+                    neuralNetwork.style.display = 'none';
+                }
+            },
+            about: {
+                description: 'About the graduate',
+                execute: () => {
+                    addOutput('Eng.Leyan Buirat', 'ai-response');
+                    addOutput('Computer Engineer specializing in AI Artificial Intelligence', 'ai-response');
+                    addOutput('Passionate about machine learning, neural networks, and creative coding', 'ai-response');
+                    addOutput('Artificial Intelligence', 'ai-response');
+                    addOutput('AI-powered Meal Recognition & Recipe Assistant (Dr.Yazan Abu Fraha)', 'ai-response');
+                }
+            },
+            accept: {
+                description: 'Accept the invitation',
+                execute: () => {
+                    if (invitation.style.display === 'block') {
+                        addOutput('Thank you for accepting the invitation!', 'ai-response');
+                        addOutput('Looking forward to seeing you there!', 'ai-response');
+                        showConfetti();
+                    } else {
+                        addOutput('Please view the invitation first with the "invite" command', 'ai-response');
+                    }
+                }
+            },
+            date: {
+                description: 'Show graduation date and time',
+                execute: () => {
+                    addOutput('🎓 INTRODUCTION GRADUATION 🎓 presentation😉👩‍🎓🥳🥳:', 'ai-response');
+                    addOutput('📅 Saturday, July 12th, 2025 👩‍🎓', 'ai-response');
+                    addOutput('🕙 10:00 AM 👩‍🎓🕙to 10:50 AM👩‍🎓🕚', 'ai-response');
+                }
+            },
+            location: {
+                description: 'Show graduation location',
+                execute: () => {
+                    addOutput('🎓 INTRODUCTION GRADUATION🎓 location:', 'ai-response');
+                    addOutput('🏛️ MASRI College of Technology', 'ai-response');
+                    addOutput('📍 Hall 303, Third Floor👩‍🎓', 'ai-response');
+                }
+            }
+        };
+
+        function addOutput(text, className = '') {
+            const output = document.createElement('div');
+            output.className = `output ${className}`;
+            output.innerHTML = text;
+            commandHistory.appendChild(output);
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        function showNeuralNetwork() {
+            neuralNetwork.style.display = 'block';
+            const svg = neuralNetwork.querySelector('svg');
+            svg.innerHTML = '';
+
+            // Create neural network visualization
+            const layers = 3;
+            const nodesPerLayer = 5;
+            const nodeRadius = 15;
+            const layerSpacing = 100;
+            const nodeSpacing = 50;
+
+            // Draw nodes
+            for (let layer = 0; layer < layers; layer++) {
+                for (let node = 0; node < nodesPerLayer; node++) {
+                    const cx = 50 + layer * layerSpacing;
+                    const cy = 30 + node * nodeSpacing;
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', cx);
+                    circle.setAttribute('cy', cy);
+                    circle.setAttribute('r', nodeRadius);
+                    circle.setAttribute('fill', layer === 1 ? 'rgb(150, 249, 150)' : '#0af');
+                    circle.setAttribute('class', 'network-node');
+                    svg.appendChild(circle);
+
+                    // Add animation delay
+                    circle.style.animationDelay = `${layer * 0.2 + node * 0.1}s`;
+                }
+            }
+
+            // Draw connections
+            for (let layer = 0; layer < layers - 1; layer++) {
+                for (let node1 = 0; node1 < nodesPerLayer; node1++) {
+                    for (let node2 = 0; node2 < nodesPerLayer; node2++) {
+                        const x1 = 50 + layer * layerSpacing;
+                        const y1 = 30 + node1 * nodeSpacing;
+                        const x2 = 50 + (layer + 1) * layerSpacing;
+                        const y2 = 30 + node2 * nodeSpacing;
+
+                        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        line.setAttribute('x1', x1);
+                        line.setAttribute('y1', y1);
+                        line.setAttribute('x2', x2);
+                        line.setAttribute('y2', y2);
+                        line.setAttribute('class', 'network-line');
+                        line.setAttribute('stroke-opacity', 0.3);
+                        svg.appendChild(line);
+                    }
+                }
+            }
+        }
+
+        function showConfetti() {
+            const confettiCanvas = document.getElementById('confetti-canvas');
+            confettiCanvas.style.display = 'block';
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+
+            const confettiCtx = confettiCanvas.getContext('2d');
+            const confettiPieces = [];
+            const colors = ['rgb(150, 249, 150)', '#0af', 'rgba(236, 215, 177, 0.7)', '#fff'];
+
+            for (let i = 0; i < 150; i++) {
+                confettiPieces.push({
+                    x: Math.random() * confettiCanvas.width,
+                    y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+                    rotation: Math.random() * 360,
+                    speed: 2 + Math.random() * 3,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    shape: Math.random() > 0.5 ? 'square' : 'circle',
+                    size: 5 + Math.random() * 5
+                });
+            }
+
+            function animateConfetti() {
+                confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+
+                for (let i = 0; i < confettiPieces.length; i++) {
+                    const p = confettiPieces[i];
+                    p.y += p.speed;
+                    p.rotation += p.speed / 10;
+
+                    if (p.y > confettiCanvas.height) {
+                        p.y = -10;
+                        p.x = Math.random() * confettiCanvas.width;
+                    }
+
+                    confettiCtx.save();
+                    confettiCtx.translate(p.x, p.y);
+                    confettiCtx.rotate(p.rotation * Math.PI / 180);
+                    confettiCtx.fillStyle = p.color;
+
+                    if (p.shape === 'square') {
+                        confettiCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    } else {
+                        confettiCtx.beginPath();
+                        confettiCtx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+                        confettiCtx.fill();
+                    }
+
+                    confettiCtx.restore();
+                }
+
+                requestAnimationFrame(animateConfetti);
+            }
+
+            animateConfetti();
+
+            // Hide confetti after 5 seconds
+            setTimeout(() => {
+                confettiCanvas.style.display = 'none';
+            }, 5000);
+        }
+
+        commandInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const command = commandInput.value.trim().toLowerCase();
+                commandInput.value = '';
+
+                addOutput(`user@graduation:~$ ${command}`);
+
+                if (commands[command]) {
+                    commands[command].execute();
+                } else {
+                    addOutput(`Command not found: ${command}`, 'ai-response');
+                    addOutput('Type "help" for available commands', 'ai-response');
+                }
+            }
+        });
+
+        // Initial help message
+        setTimeout(() => {
+            commands.help.execute();
+        }, 1000);
+    </script>
+</body>
+
+</html>
