@@ -3,6 +3,11 @@
 <div align="center">
   <img src="invite.gif" width="800" alt="System Demo">
 </div>
+
+<div align="center">
+  <img src="invite.jpg" width="600" alt="System Architecture">
+  <br>
+</div>
 ## 🚀 About This Project
 An interactive, AI-themed graduation invitation for **Leyan Buirat's** Computer Engineering graduation with concentration in Artificial Intelligence. This web-based invitation features:
 - Terminal-style interface
