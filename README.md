@@ -1,7 +1,7 @@
 # 🎓 Introduction Graduation Invitation - Leyan Buirat
 
 <div align="center">
-  <img src="invite-for-the-system.gif" width="800" alt="System Demo">
+  <img src="invite.gif" width="800" alt="System Demo">
 </div>
 ## 🚀 About This Project
 An interactive, AI-themed graduation invitation for **Leyan Buirat's** Computer Engineering graduation with concentration in Artificial Intelligence. This web-based invitation features:
