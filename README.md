@@ -1,7 +1,8 @@
 # 🎓 Introduction Graduation Invitation - Leyan Buirat
 
-[Invitation Demo](invite.gif)
-
+<div align="center">
+  <img src="invite-for-the-system.gif" width="800" alt="System Demo">
+</div>
 ## 🚀 About This Project
 An interactive, AI-themed graduation invitation for **Leyan Buirat's** Computer Engineering graduation with concentration in Artificial Intelligence. This web-based invitation features:
 - Terminal-style interface
@@ -46,12 +47,9 @@ Confetti celebration effect
 
 Fully responsive design
 
-
-
 🎥 Video Demo
 The invite.gif file demonstrates the full invitation flow from command input to confetti celebration.
-
-🙏 Special Thanks
+ Special Thanks
 To all professors, colleagues, and family members who supported this academic journey.
 
 <div align="center"> <p>Made with ❤️ by Leyan Buirat</p> <p>Computer Engineering | Artificial Intelligence</p> </div> ```
